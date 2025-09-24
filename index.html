@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusMart - Your Campus Marketplace</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>CampusMart</h2>
+            </div>
+            
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#shop" class="nav-link">Shop</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+
+            <div class="nav-actions">
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Search products..." class="search-input">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+                
+                <button class="theme-toggle" id="theme-toggle" title="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                
+                <button class="cart-btn" id="cart-btn">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-badge" id="cart-badge">0</span>
+                </button>
+                
+                <button class="mobile-menu-btn" id="mobile-menu-btn" title="Open mobile menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Your Campus <span class="highlight">Marketplace</span></h1>
+            <p>Buy, sell, and discover amazing deals from your fellow students. From textbooks to tech, furniture to fashion - everything you need for campus life.</p>
+            <button class="cta-btn" onclick="scrollToSection('shop')">Start Shopping</button>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.pexels.com/photos/5212345/pexels-photo-5212345.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Campus Shopping">
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories">
+        <div class="container">
+            <h2>Shop by Category</h2>
+            <div class="category-filters">
+                <button class="filter-btn active" data-category="all">All Products</button>
+                <button class="filter-btn" data-category="stationery">Stationery</button>
+                <button class="filter-btn" data-category="electronics">Electronics</button>
+                <button class="filter-btn" data-category="essentials">Essentials</button>
+                <button class="filter-btn" data-category="books">Books</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="shop" class="products">
+        <div class="container">
+            <h2>Featured Products</h2>
+            <div class="products-grid" id="products-grid">
+                <!-- Products will be dynamically loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>Why Choose CampusMart?</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Verified Sellers</h3>
+                    <p>All sellers are verified students from your university with authentic student IDs.</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-truck"></i>
+                    <h3>Campus Delivery</h3>
+                    <p>Fast and convenient delivery right to your dorm or preferred campus location.</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-comments"></i>
+                    <h3>Direct Messaging</h3>
+                    <p>Chat directly with sellers, ask questions, and negotiate prices in real-time.</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-rupee-sign"></i>
+                    <h3>Best Prices</h3>
+                    <p>Get amazing deals on textbooks, electronics, and more at student-friendly prices.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>support@campusmart.store</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+91 98765 43210</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Available at 200+ universities nationwide</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Modal -->
+    <div class="modal" id="cart-modal">
+        <div class="modal-content cart-modal-content">
+            <div class="modal-header">
+                <h3>Shopping Cart</h3>
+                <button class="close-btn" id="close-cart">&times;</button>
+            </div>
+            <div class="cart-items" id="cart-items">
+                <!-- Cart items will be dynamically loaded here -->
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <strong>Total: ₹<span id="cart-total">0</span></strong>
+                </div>
+                <button class="checkout-btn">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div class="modal" id="product-modal">
+        <div class="modal-content product-modal-content">
+            <button class="close-btn" id="close-product">&times;</button>
+            <div class="product-detail">
+                <div class="product-image">
+                    <img id="modal-product-image" src="" alt="">
+                </div>
+                <div class="product-info">
+                    <h3 id="modal-product-name"></h3>
+                    <p class="product-price">₹<span id="modal-product-price"></span></p>
+                    <p class="product-description" id="modal-product-description"></p>
+                    <div class="product-actions">
+                        <button class="add-to-cart-btn" id="modal-add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CampusMart</h3>
+                    <p>The trusted marketplace connecting students across universities for buying and selling campus essentials.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#shop">Shop</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="#">Stationery</a></li>
+                        <li><a href="#">Electronics</a></li>
+                        <li><a href="#">Books</a></li>
+                        <li><a href="#">Essentials</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 CampusMart. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
